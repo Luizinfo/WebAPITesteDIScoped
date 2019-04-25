@@ -1,27 +1,22 @@
-﻿using System;
-
-namespace WebAPITesteDIScoped
+﻿namespace WebAPITesteDIScoped
 {
     public class ContadorService : IContadorService
     {
         private IContador contatorA;
+        private IContador contadorB;
 
-        public ContadorService(IContador contatorA)
+        public ContadorService(ContadorA contatorA, ContadorB contadorB)
         {
             this.contatorA = contatorA;
+            this.contadorB = contadorB;
         }
 
-        public Resposta Processar(string texto)
+        public void Processar()
         {
-            contatorA.Contexto.textoRecebido = texto;
-
             contatorA.QtdLetras();
             contatorA.QtdPalavras();
 
-            contatorA.Contexto.Resposta.dtResposta = DateTime.Now;
-            contatorA.Contexto.Resposta.sucesso = true;
-
-            return contatorA.Contexto.Resposta;
+            contadorB.QtdLetras();
         }
     }
 }

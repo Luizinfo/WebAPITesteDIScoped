@@ -1,8 +1,8 @@
 ﻿namespace WebAPITesteDIScoped
 {
-    public class ContadorA : ContatorBase
+    public class ContadorB : ContatorBase
     {
-        public ContadorA(ContextoVolatil contexto) : base(contexto)
+        public ContadorB(ContextoVolatil contexto) : base(contexto)
         {
         }
 
@@ -12,12 +12,12 @@
             int qtd = 0;
             foreach (var item in texto)
             {
-                if (item == 'a' || item == 'A')
+                if (item == 'b' || item == 'B')
                     qtd++;
             }
 
             Contexto.Resposta.letras += qtd;
-            Contexto.Resposta.Mensagem = $"Existem {qtd} letras A nesta frase.";
+            Contexto.Resposta.Mensagem += $" - Existem {qtd} letras B nesta frase.";
         }
     }
 }

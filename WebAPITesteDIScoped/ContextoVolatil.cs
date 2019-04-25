@@ -7,10 +7,9 @@
             Resposta = new Resposta();
             textoRecebido = "";
         }
+
         public string textoRecebido { get; set; }
 
         public Resposta Resposta { get; set; }
-
-
     }
 }

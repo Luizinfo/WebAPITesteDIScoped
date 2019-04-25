@@ -1,20 +1,12 @@
-﻿using WebAPITesteDIScoped.Provider;
-
-namespace WebAPITesteDIScoped
+﻿namespace WebAPITesteDIScoped
 {
     public abstract class ContatorBase : IContador
     {
-        protected IProvider<ContextoVolatil> scopedServiceProvider;
+        protected ContextoVolatil Contexto;
 
-        public ContatorBase(IProvider<ContextoVolatil> scopedServiceProvider)
+        public ContatorBase(ContextoVolatil contexto)
         {
-            this.scopedServiceProvider = scopedServiceProvider;
-        }
-
-        public ContextoVolatil Contexto
-        {
-            get => scopedServiceProvider.Get();
-            set { Contexto = value; }
+            Contexto = contexto;
         }
 
         public abstract void QtdLetras();

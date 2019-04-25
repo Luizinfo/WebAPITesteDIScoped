@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace WebAPITesteDIScoped
+﻿namespace WebAPITesteDIScoped
 {
     public interface IContadorService
     {
-        Resposta Processar(string texto);
+        void Processar();
     }
 }

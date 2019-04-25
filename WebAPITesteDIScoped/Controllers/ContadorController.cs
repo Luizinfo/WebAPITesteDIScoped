@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPITesteDIScoped.Controllers
 {
@@ -12,18 +7,22 @@ namespace WebAPITesteDIScoped.Controllers
     public class ContadorController : ControllerBase
     {
         private IContadorService contadorService;
-        public ContadorController(IContadorService contadorService)
+        private ContextoVolatil context;
+
+        public ContadorController(IContadorService contadorService, ContextoVolatil context)
         {
             this.contadorService = contadorService;
+            this.context = context;
         }
 
         // POST api/Contador
         [HttpPost]
         public IActionResult Post([FromBody] string text)
         {
-            var result = contadorService.Processar(text);
+            context.textoRecebido = text;
+            contadorService.Processar();
 
-            return Ok(result);
+            return Ok(context.Resposta);
         }
     }
 }
