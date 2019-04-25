@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebAPITesteDIScoped.Provider;
 
 namespace WebAPITesteDIScoped
 {
@@ -25,6 +28,12 @@ namespace WebAPITesteDIScoped
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+
+            services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IProvider<ContextoVolatil>, Provider<ContextoVolatil>>();
+            services.AddScoped<ContextoVolatil, ContextoVolatil>();
+            services.AddTransient<IContador, ContadorA>();
+            services.AddTransient<IContadorService, ContadorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
